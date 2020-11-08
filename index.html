@@ -7,8 +7,31 @@
 </head>
 <body>
   <h2 style="text-align: center;">
-    Hello world, you've entered a very useless space. In fact, you'd better go googling something else. 
+    Hello world, you've entered a very useless space.  
   </h2>
-  <img style="display: block; margin: 0 auto;" src="https://i.imgur.com/Y8PIcM4.gif" alt="cat">
+  <h3 style="text-align: center;">
+	In fact, you'd better go googling something else.
+  </h3>
+  <img id="cat" style="display: block; margin: 0 auto;" alt="cat">
+  <div style="text-align: center;">
+	<button style="margin: 2rem;" onclick="changeCat()">Click me!</button>
+  </div>
+  <script>
+	const cats = [
+		"https://media.tenor.com/images/75b3c8eca95d917c650cd574b91db7f7/tenor.gif",
+		"https://i.imgur.com/Y8PIcM4.gif",
+		"https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif",
+		"https://media.giphy.com/media/d78vbBA54uHFS/giphy.gif"
+	]
+  
+	let currentCat = 0;
+	const img = document.getElementById("cat");
+	img.src = cats[currentCat];
+	
+	function changeCat() {
+		currentCat++;
+		img.src = cats[currentCat % cats.length]
+	}
+  </script>
 </body>
 </html>
