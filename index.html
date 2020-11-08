@@ -27,8 +27,8 @@
     const img = document.getElementById("cat");
     img.src = cats[currentCat];
     function changeCat() {
-      currentCat = currentCat + 1 % cats.length;
-      img.src = cats[currentCat]
+      currentCat = currentCat + 1;
+      img.src = cats[currentCat % cats.length];
     }
 
     document.onkeydown = (event) => {
