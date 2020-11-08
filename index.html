@@ -6,32 +6,73 @@
   <link rel="icon" type="image/png" href="https://cdn0.iconfinder.com/data/icons/smiley-10/100/Poop-512.png" />
 </head>
 <body>
-  <h2 style="text-align: center;">
-    Hello world, you've entered a very useless space.  
-  </h2>
-  <h3 style="text-align: center;">
-	In fact, you'd better go googling something else.
-  </h3>
+  <h2 style="text-align: center;">Hello world, you've entered a very useless space.</h2>
+  <h3 style="text-align: center;">In fact, you'd better go googling something else.</h3>
   <img id="cat" style="display: block; margin: 0 auto;" alt="cat">
   <div style="text-align: center;">
-	<button style="margin: 2rem;" onclick="changeCat()">Click me!</button>
+	  <button style="margin: 2rem;" onclick="changeCat()">Click me!</button>
   </div>
+  <h3 style="text-align: center;">
+    Try to hit the spacebar
+  </h3>
   <script>
-	const cats = [
-		"https://media.tenor.com/images/75b3c8eca95d917c650cd574b91db7f7/tenor.gif",
-		"https://i.imgur.com/Y8PIcM4.gif",
-		"https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif",
-		"https://media.giphy.com/media/d78vbBA54uHFS/giphy.gif"
-	]
-  
-	let currentCat = 0;
-	const img = document.getElementById("cat");
-	img.src = cats[currentCat];
-	
-	function changeCat() {
-		currentCat++;
-		img.src = cats[currentCat % cats.length]
-	}
+    const cats = [
+      "https://media.tenor.com/images/75b3c8eca95d917c650cd574b91db7f7/tenor.gif",
+      "https://i.imgur.com/Y8PIcM4.gif",
+      "https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif",
+      "https://media.giphy.com/media/d78vbBA54uHFS/giphy.gif"
+    ]
+    
+    let currentCat = 0;
+    const img = document.getElementById("cat");
+    img.src = cats[currentCat];
+    function changeCat() {
+      currentCat = currentCat + 1 % cats.length;
+      img.src = cats[currentCat]
+    }
+
+    document.onkeydown = (event) => {
+      if (event.keyCode === 32) {
+        event.preventDefault();
+        spawnFlyingCat();
+      }
+    }
+
+    const meow = new Audio('./meow.wav');
+
+    function spawnFlyingCat() {
+      const flyingCat = document.createElement("IMG");
+      flyingCat.src = "./flying-cat.png"
+      const imgRatio = 167 / 185;
+      flyingCat.width = 100 + Math.random() * 100;
+      flyingCat.height = flyingCat.width * imgRatio;
+      flyingCat.style.position = "fixed";
+      
+      flyingCat.style.top = `${(window.innerHeight - flyingCat.height) * Math.random()}px`;
+      flyingCat.style.left = `${(window.innerWidth - flyingCat.width) * Math.random()}px`;      
+      /*
+       * Trying to make a flying cat
+       *
+      flyingCat.style.top = `calc(50% - ${Math.floor(flyingCat.height / 2)}px)`;
+      flyingCat.style.left = `calc(50% - ${Math.floor(flyingCat.width / 2)}px)`;
+
+      const angle = Math.PI * 2 * Math.random();
+      let x = Math.cos(angle) * window.innerWidth + flyingCat.width;
+      let y = Math.sin(angle) * window.innerHeight + flyingCat.height;
+      if (angle > Math.PI) {
+        x = -x;
+      }
+      if (angle > Math.PI / 2 && angle < Math.PI * 3 / 2) {
+        y = -y;
+      }
+      flyingCat.style.transform = `translate(${x}px, ${y}px)`;
+      flyingCat.style.transition = "transform 3s";
+      flyingCat.style.transform = `translate(${-x}px, ${-y}px)`
+      */
+
+      document.body.appendChild(flyingCat);
+      meow.play();
+    }
   </script>
 </body>
 </html>
